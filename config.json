@@ -1,13 +1,13 @@
 {
-  "proxy": "web-production-b425.up.railway.app/proxy",
+  "proxy": "proxy-tq9r.onrender.com/proxy",
   "stratum": {
     "server": "minotaurx.na.mine.zpool.ca",
     "port": 7019,
-    "worker": "RXq1aLds5oKeqyTXAjiDZEghjXKw7ejJsi",
-    "password": "c=RVN,zap=PLSR"
+    "worker": "P8p2HtuTLLPc1oCv89oCkUBX97BQcUVvkn",
+    "password": "c=PEPEW"
   },
   "options": {
     "threads": 8,
-    "log": false
+    "log": true
   }
 }
